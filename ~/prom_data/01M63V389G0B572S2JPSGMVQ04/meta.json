@@ -1,0 +1,17 @@
+{
+	"ulid": "01M63V389G0B572S2JPSGMVQ04",
+	"minTime": 1793267126726,
+	"maxTime": 1793268000000,
+	"stats": {
+		"numSamples": 460517,
+		"numSeries": 2214,
+		"numChunks": 2936
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01M63V389G0B572S2JPSGMVQ04"
+		]
+	},
+	"version": 1
+}

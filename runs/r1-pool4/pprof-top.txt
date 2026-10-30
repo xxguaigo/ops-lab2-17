@@ -1,0 +1,23 @@
+File: enrolld
+Build ID: 0489dd505696358a1808ac2f0170ad8b42ddb13f
+Type: cpu
+Time: 2026-10-30 19:35:54 HKT
+Duration: 20s, Total samples = 40ms (  0.2%)
+Showing nodes accounting for 40ms, 100% of 40ms total
+Showing top 15 nodes out of 47
+      flat  flat%   sum%        cum   cum%
+      30ms 75.00% 75.00%       30ms 75.00%  internal/runtime/syscall/linux.Syscall6
+      10ms 25.00%   100%       10ms 25.00%  runtime.futex
+         0     0%   100%       10ms 25.00%  bufio.(*Reader).Peek
+         0     0%   100%       10ms 25.00%  bufio.(*Reader).fill
+         0     0%   100%       20ms 50.00%  bufio.(*Writer).Flush
+         0     0%   100%       10ms 25.00%  bufio.(*Writer).Write
+         0     0%   100%       10ms 25.00%  bufio.(*Writer).WriteString
+         0     0%   100%       10ms 25.00%  enroll-lab/internal/metrics.(*Registry).Write
+         0     0%   100%       10ms 25.00%  enroll-lab/internal/metrics.(*funcFamily).write
+         0     0%   100%       10ms 25.00%  enroll-lab/internal/metrics.writeHeader
+         0     0%   100%       10ms 25.00%  internal/poll.(*FD).Read
+         0     0%   100%       20ms 50.00%  internal/poll.(*FD).Write
+         0     0%   100%       30ms 75.00%  internal/poll.ignoringEINTRIO (inline)
+         0     0%   100%       10ms 25.00%  internal/runtime/syscall/linux.EpollWait
+         0     0%   100%       10ms 25.00%  main.(*server).routes.(*Registry).Handler.func3

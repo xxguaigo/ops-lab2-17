@@ -1,0 +1,17 @@
+{
+	"ulid": "01M63VXWTSS05SH1A0MB22AGBW",
+	"minTime": 1793268000551,
+	"maxTime": 1793275200000,
+	"stats": {
+		"numSamples": 3934215,
+		"numSeries": 2213,
+		"numChunks": 32920
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01M63VXWTSS05SH1A0MB22AGBW"
+		]
+	},
+	"version": 1
+}
