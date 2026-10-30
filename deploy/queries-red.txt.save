@@ -3,7 +3,6 @@
 #
 # 每行：名字  PromQL。${window} 是阶段窗口（阶段时长减去开头 5 s）；${route}、${slo} 由 run.sh 填：
 # route 是压测的那个接口，slo 是延迟阈值（秒）。每条查询只能返回一条序列，需要时用 sum(...) 聚合。
-
 # ---- 任务 1：RED 的三条线，以及最后一行的 SLI。把 TODO 换成你们写的 PromQL（参考 L-08 第 25 页），只看 route="${route}" 这个接口 ----
 # 每秒处理完的请求数（所有状态码）
 server_rps          sum(rate(http_request_duration_seconds_count{route="${route}"}[${window}]))
@@ -11,7 +10,6 @@ server_rps          sum(rate(http_request_duration_seconds_count{route="${route}
 server_error_rate   sum(rate(http_request_duration_seconds_count{route="${route}",code=~"5.."}[${window}])) / sum(rate(http_request_duration_seconds_count{route="${route}"}[${window}])) or vector(0)
 # 服务端耗时的 p99，单位毫秒。直方图带 code 标签，要先按 le 把各 code 的桶加起来
 server_p99_ms       histogram_quantile(0.99, sum by (le) (rate(http_request_duration_seconds_bucket{route="${route}"}[${window}]))) * 1000
-
 # ---- 已经写好的 ----
 # 服务端平均耗时（毫秒）= 耗时之和的速率 ÷ 次数的速率
 server_mean_ms      1000 * sum(rate(http_request_duration_seconds_sum{route="${route}"}[${window}])) / sum(rate(http_request_duration_seconds_count{route="${route}"}[${window}]))
@@ -34,6 +32,5 @@ fsync_mean_ms       1000 * rate(enroll_fsync_duration_seconds_sum[${window}]) / 
 fsync_p99_ms        1000 * histogram_quantile(0.99, rate(enroll_fsync_duration_seconds_bucket[${window}]))
 batch_mean          rate(enroll_commit_batch_size_sum[${window}]) / rate(enroll_commit_batch_size_count[${window}])
 goroutines_max      max_over_time(go_goroutines{job="enrolld"}[${window}])
-
 # ---- 任务 1：服务端看到的 SLI = 成功（code="200"）且耗时不超过 ${slo} 秒的请求 ÷ 全部请求（L-08 第 19 页）----
-server_slo_good     TODO
+server_slo_good     sum(rate(http_request_duration_seconds_bucket{route="${route}", code="200", le="${slo}"}[${window}])) / sum(rate(http_request_duration_seconds_count{route="${route}"}[${window}])) or vector(0)
